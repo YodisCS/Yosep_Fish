@@ -218,9 +218,9 @@ if ($action === 'buat_pesanan') {
       --gray-300: rgba(203, 213, 225, 0.5);
       --gray-400: rgba(148, 163, 184, 0.7);
       --gray-600: #475569;
-      --text: rgba(15, 23, 42, 0.9);
-      --text-muted: rgba(100, 116, 139, 0.8);
-      --text-light: rgba(148, 163, 184, 0.7);
+      --text: rgba(255, 255, 255, 0.95);
+      --text-muted: rgba(255, 255, 255, 0.75);
+      --text-light: rgba(255, 255, 255, 0.6);
       --accent: #0F766E;
       --success: #22C55E;
       --error: #DC2626;
@@ -296,6 +296,7 @@ if ($action === 'buat_pesanan') {
     .filter-title {
       text-transform: none;
       letter-spacing: 0.2px;
+      color: #FFFFFF;
     }
 
     .checkout-title {
@@ -328,6 +329,11 @@ if ($action === 'buat_pesanan') {
     textarea,
     select {
       font-family: var(--font-body);
+    }
+
+    option {
+      background: #0F172A;
+      color: #FFFFFF;
     }
 
     ::-webkit-scrollbar {
@@ -486,7 +492,7 @@ if ($action === 'buat_pesanan') {
       align-items: center;
       gap: 8px;
       margin-bottom: 28px;
-      color: var(--text);
+      color: #FFFFFF;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -499,7 +505,7 @@ if ($action === 'buat_pesanan') {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.8px;
-      color: var(--text-muted);
+      color: #FFFFFF;
       text-transform: uppercase;
       margin-bottom: 12px;
       display: block;
@@ -508,11 +514,11 @@ if ($action === 'buat_pesanan') {
     .search-input {
       width: 100%;
       padding: 11px 14px;
-      border: 1px solid var(--gray-200);
+      border: 1px solid var(--border-glass);
       border-radius: var(--radius-sm);
       font-size: 14px;
-      color: var(--text);
-      background: var(--gray-100);
+      color: #FFFFFF;
+      background: var(--bg-glass-light);
       transition: var(--transition);
       outline: none;
       margin-bottom: 24px;
@@ -523,9 +529,9 @@ if ($action === 'buat_pesanan') {
     }
 
     .search-input:focus {
-      border-color: var(--blue);
-      background: white;
-      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+      border-color: var(--blue-light);
+      background: var(--bg-glass);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
     }
 
     .kategori-group {
@@ -540,16 +546,16 @@ if ($action === 'buat_pesanan') {
       border-radius: 99px;
       font-size: 12px;
       font-weight: 600;
-      border: 1px solid var(--gray-300);
-      background: white;
-      color: var(--text-muted);
+      border: 1px solid var(--border-glass);
+      background: var(--bg-glass-light);
+      color: #FFFFFF;
       transition: var(--transition);
     }
 
     .kat-btn:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: rgba(15, 118, 110, 0.04);
+      border-color: var(--blue-light);
+      color: var(--blue-light);
+      background: var(--bg-glass);
     }
 
     .kat-btn.active {
@@ -570,7 +576,7 @@ if ($action === 'buat_pesanan') {
       width: 100%;
       height: 5px;
       -webkit-appearance: none;
-      background: linear-gradient(to right, var(--blue) var(--pct, 50%), var(--gray-200) var(--pct, 50%));
+      background: linear-gradient(to right, var(--blue) var(--pct, 50%), var(--bg-glass-strong) var(--pct, 50%));
       border-radius: 99px;
       outline: none;
       cursor: pointer;
@@ -619,7 +625,7 @@ if ($action === 'buat_pesanan') {
       position: relative;
       padding-top: 72%;
       overflow: hidden;
-      background: var(--gray-200);
+      background: var(--bg-glass-light);
     }
 
     .card-img-wrap img {
@@ -727,7 +733,7 @@ if ($action === 'buat_pesanan') {
       grid-column: 1/-1;
       text-align: center;
       padding: 60px 20px;
-      color: var(--text-muted);
+      color: #FFFFFF;
     }
 
     .no-products .icon {
@@ -951,21 +957,21 @@ if ($action === 'buat_pesanan') {
 
     .metode-btn {
       padding: 12px;
-      border: 1px solid var(--gray-300);
+      border: 1px solid var(--border-glass);
       border-radius: var(--radius-sm);
       font-family: var(--font-display);
       font-size: 13px;
       font-weight: 600;
-      background: white;
-      color: var(--text-muted);
+      background: var(--bg-glass-light);
+      color: #FFFFFF;
       transition: var(--transition);
       text-align: center;
     }
 
     .metode-btn:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: rgba(15, 118, 110, 0.04);
+      border-color: var(--blue-light);
+      color: var(--blue-light);
+      background: var(--bg-glass);
     }
 
     .metode-btn.active {
@@ -999,7 +1005,7 @@ if ($action === 'buat_pesanan') {
       align-items: center;
       gap: 12px;
       padding: 12px 0;
-      border-bottom: 1px solid var(--gray-100);
+      border-bottom: 1px solid var(--border-glass);
       animation: fadeIn 0.3s ease;
     }
 
@@ -1009,7 +1015,7 @@ if ($action === 'buat_pesanan') {
       border-radius: 8px;
       object-fit: cover;
       flex-shrink: 0;
-      background: var(--gray-200);
+      background: var(--bg-glass-light);
     }
 
     .cart-item-info {
@@ -1020,7 +1026,7 @@ if ($action === 'buat_pesanan') {
     .cart-item-nama {
       font-size: 13px;
       font-weight: 600;
-      color: var(--text);
+      color: #FFFFFF;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1028,14 +1034,14 @@ if ($action === 'buat_pesanan') {
 
     .cart-item-qty {
       font-size: 12px;
-      color: var(--text-muted);
+      color: #FFFFFF;
     }
 
     .cart-item-harga {
       font-family: var(--font-display);
       font-size: 13px;
       font-weight: 700;
-      color: var(--text);
+      color: #FFFFFF;
       white-space: nowrap;
     }
 
@@ -1061,7 +1067,7 @@ if ($action === 'buat_pesanan') {
       display: flex;
       justify-content: space-between;
       font-size: 13px;
-      color: var(--text-muted);
+      color: #FFFFFF;
       margin-bottom: 8px;
     }
 
@@ -1071,9 +1077,9 @@ if ($action === 'buat_pesanan') {
       font-family: var(--font-display);
       font-size: 18px;
       font-weight: 700;
-      color: var(--text);
+      color: #FFFFFF;
       padding-top: 16px;
-      border-top: 1px solid var(--gray-200);
+      border-top: 1px solid var(--border-glass);
       margin-top: 16px;
     }
 
@@ -1108,7 +1114,7 @@ if ($action === 'buat_pesanan') {
       gap: 8px;
       font-size: 13px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #FFFFFF;
       margin-bottom: 20px;
       padding: 8px 12px;
       border-radius: 8px;
@@ -1119,15 +1125,15 @@ if ($action === 'buat_pesanan') {
     }
 
     .back-btn:hover {
-      background: var(--gray-100);
-      color: var(--blue);
+      background: var(--bg-glass-strong);
+      color: var(--blue-light);
     }
 
     /* Empty cart */
     .empty-cart {
       text-align: center;
       padding: 40px 20px;
-      color: var(--text-muted);
+      color: #FFFFFF;
     }
 
     .empty-cart .icon {
@@ -1156,8 +1162,9 @@ if ($action === 'buat_pesanan') {
       pointer-events: all;
     }
 
+    /* Perubahan untuk modal putih agar teks di dalamnya gelap */
     .modal-box {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
       border-radius: var(--radius-lg);
@@ -1176,12 +1183,12 @@ if ($action === 'buat_pesanan') {
     }
 
     .modal-customer-info {
-      background: rgba(0, 0, 0, 0.05);
+      background: #F8FAFC;
       border-radius: 8px;
       padding: 16px;
       margin: 16px 0;
       text-align: left;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid #E2E8F0;
     }
 
     .info-row {
@@ -1196,13 +1203,13 @@ if ($action === 'buat_pesanan') {
     }
 
     .info-row strong {
-      color: #FFFFFF;
+      color: #0F172A;
       min-width: 80px;
       font-weight: 600;
     }
 
     .info-row span {
-      color: rgba(255, 255, 255, 0.9);
+      color: #334155;
       text-align: right;
       flex: 1;
       font-weight: 500;
@@ -1225,25 +1232,26 @@ if ($action === 'buat_pesanan') {
       font-size: 24px;
       font-weight: 700;
       margin-bottom: 12px;
-      color: var(--text);
+      color: #0F172A;
     }
 
     .modal-kode {
       display: inline-block;
-      background: var(--gray-100);
+      background: #F1F5F9;
       border-radius: 8px;
       padding: 12px 24px;
       font-family: var(--font-display);
       font-size: 16px;
       font-weight: 700;
-      color: var(--blue);
+      color: #0F766E;
       letter-spacing: 0.5px;
       margin: 16px 0;
+      border: 1px solid #E2E8F0;
     }
 
     .modal-info {
       font-size: 13px;
-      color: var(--text-muted);
+      color: #475569;
       margin-bottom: 28px;
       line-height: 1.7;
     }
@@ -1274,12 +1282,13 @@ if ($action === 'buat_pesanan') {
     }
 
     .modal-btn.secondary {
-      background: var(--gray-200);
-      color: var(--text);
+      background: #F1F5F9;
+      color: #0F172A;
+      border: 1px solid #E2E8F0;
     }
 
     .modal-btn.secondary:hover {
-      background: var(--gray-300);
+      background: #E2E8F0;
     }
 
     .modal-btn.primary {
@@ -1290,6 +1299,7 @@ if ($action === 'buat_pesanan') {
       background: #16a34a;
     }
 
+    /* Modal khusus produk menggunakan warna gelap/glass */
     .product-modal-overlay {
       position: fixed;
       inset: 0;
@@ -1364,7 +1374,7 @@ if ($action === 'buat_pesanan') {
       object-fit: cover;
       border-radius: 12px;
       margin-bottom: 20px;
-      background: var(--gray-200);
+      background: var(--bg-glass-light);
     }
 
     .product-modal-title {
@@ -1466,7 +1476,7 @@ if ($action === 'buat_pesanan') {
     }
 
     .skeleton {
-      background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+      background: linear-gradient(90deg, var(--bg-glass-light) 25%, var(--bg-glass-strong) 50%, var(--bg-glass-light) 75%);
       background-size: 200% 100%;
       animation: shimmer 1.5s infinite;
       border-radius: var(--radius);
@@ -1642,7 +1652,6 @@ if ($action === 'buat_pesanan') {
   <div id="pageShop" class="page-shop active">
     <div class="shop-layout">
 
-      <!-- Filter Panel -->
       <aside class="filter-panel">
         <div class="filter-title">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -1684,7 +1693,6 @@ if ($action === 'buat_pesanan') {
 
     </div>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-inner">
         <div class="footer-brand">
@@ -1769,15 +1777,20 @@ if ($action === 'buat_pesanan') {
                 <rect x="1" y="4" width="22" height="16" rx="2" />
                 <line x1="1" y1="10" x2="23" y2="10" />
               </svg>
-              Metode Pembayaran
+              Metode Pembayaran (QRIS / QR Code)
             </div>
-            <div class="metode-group">
-              <button class="metode-btn active" data-val="BCA" onclick="setMetode(this)">BCA</button>
-              <button class="metode-btn" data-val="Mandiri" onclick="setMetode(this)">Mandiri</button>
-              <button class="metode-btn" data-val="BRI" onclick="setMetode(this)">BRI</button>
-              <button class="metode-btn" data-val="Gopay" onclick="setMetode(this)">Gopay</button>
-              <button class="metode-btn" data-val="Dana" onclick="setMetode(this)">Dana</button>
-              <button class="metode-btn" data-val="OVO" onclick="setMetode(this)">OVO</button>
+            <div style="text-align:center; padding: 16px; background: var(--bg-glass-light); border-radius: 12px; border: 1px solid var(--border-glass);">
+              <p style="font-size: 13px; color: #FFFFFF; margin-bottom: 16px; line-height: 1.5;">
+                Silakan scan QR Code di bawah ini menggunakan aplikasi e-Wallet atau M-Banking Anda.
+              </p>
+
+              <img src="assets/img/QRCode.jpeg"
+                alt="QR Code Pembayaran"
+                style="width: 200px; height: 200px; object-fit: contain; margin: 0 auto; border-radius: 12px; border: 4px solid white; box-shadow: var(--shadow-sm);">
+
+              <p style="font-size: 12px; color: #A5F3FC; margin-top: 16px; font-weight: 600;">
+                * Wajib screenshot bukti pembayaran untuk dikirim via WhatsApp.
+              </p>
             </div>
           </div>
         </div>
@@ -1819,10 +1832,10 @@ if ($action === 'buat_pesanan') {
         <div class="info-row"><strong>Wilayah:</strong> <span id="modalWilayah">—</span></div>
       </div>
       <p class="modal-info">
-        Silakan transfer ke rekening <strong id="modalMetode">—</strong> dan konfirmasi via WhatsApp.<br>
-        Subtotal: <strong id="modalSubtotal">—</strong><br>
-        Ongkir: <strong id="modalOngkir">—</strong><br>
-        <strong>Total: <span id="modalTotal">—</span></strong>
+        Pembayaran via <strong id="modalMetode" style="color:#0F172A">—</strong>.<br>
+        Subtotal: <strong id="modalSubtotal" style="color:#0F172A">—</strong> | Ongkir: <strong id="modalOngkir" style="color:#0F172A">—</strong><br>
+        <span style="font-size: 16px; color: #0F766E;"><strong>Total Bayar: <span id="modalTotal">—</span></strong></span><br><br>
+        Jika sudah scan QR Code & bayar, klik tombol di bawah untuk melampirkan <strong style="color:#0F172A">Bukti Screenshot</strong> via WhatsApp.
       </p>
       <div class="modal-buttons">
         <button class="modal-btn secondary" onclick="closeModal()">Kembali Belanja</button>
@@ -1850,7 +1863,7 @@ if ($action === 'buat_pesanan') {
   <script>
     let filterTimer = null;
     let currentKategori = 'Semua';
-    let currentMetode = 'BCA';
+    let currentMetode = 'QR Code';
     let cart = [];
     const shippingRates = {
       'Jabodetabek': 20000,
@@ -2034,11 +2047,6 @@ if ($action === 'buat_pesanan') {
         });
     }
 
-    function setMetode(el) {
-      document.querySelectorAll('.metode-btn').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-      currentMetode = el.dataset.val;
-    }
 
     function buatPesanan() {
       const nama = document.getElementById('namaPenerima').value.trim();
@@ -2189,9 +2197,10 @@ if ($action === 'buat_pesanan') {
         `   Metode: ${orderData.metode}\n` +
         `   Subtotal: Rp ${fmt(orderData.subtotal || 0)}\n` +
         `   Ongkir: Rp ${fmt(orderData.ongkir || 0)}\n` +
-        `   Total: Rp ${fmt(orderData.total)}\n` +
+        `   Total Bayar: Rp ${fmt(orderData.total)}\n` +
         `  *=============================*\n\n` +
-        `   Mohon konfirmasi pesanan ini dan berikan instruksi pembayaran. Terima kasih! `;
+        `   ✅ *Saya sudah melakukan pembayaran via QR Code.*\n` +
+        `   *(Silakan lampirkan gambar/screenshot bukti transfer Anda di chat ini)* `;
 
       return message;
     }

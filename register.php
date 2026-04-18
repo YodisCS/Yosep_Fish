@@ -2,7 +2,6 @@
 session_start();
 require_once 'config/db.php';
 
-// Jika sudah login, redirect
 if (isLoggedIn()) {
     redirect('index.php');
 }
@@ -10,7 +9,6 @@ if (isLoggedIn()) {
 $error   = '';
 $success = '';
 
-// ── Proses register ──
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_depan    = sanitize($_POST['nama_depan']    ?? '');
     $nama_belakang = sanitize($_POST['nama_belakang'] ?? '');
@@ -19,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password      = $_POST['password']               ?? '';
     $pw_confirm    = $_POST['password_confirm']       ?? '';
 
-    // ── Validasi ──
     if (empty($nama_depan) || empty($nama_belakang) || empty($no_hp) || empty($email) || empty($password)) {
         $error = 'Semua field wajib diisi.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -33,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!isset($_POST['terms'])) {
         $error = 'Anda harus menyetujui Syarat & Ketentuan.';
     } else {
-        // Cek email sudah terdaftar
         $chk = $conn->prepare("SELECT id FROM users WHERE LOWER(email) = ? LIMIT 1");
         $chk->bind_param('s', $email);
         $chk->execute();
@@ -74,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="auth-wrapper">
 
-  <!-- ═══ LEFT PANEL ═══ -->
   <div class="auth-left">
     <a href="index.php" class="auth-left-logo">YOSEP FISH</a>
     <div class="auth-left-content">
@@ -97,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="auth-left-footer">© 2026 Yosep Fish. Quality First.</div>
   </div>
 
-  <!-- ═══ RIGHT PANEL ═══ -->
   <div class="auth-right">
 
     <div class="auth-tabs" style="max-width:480px;width:100%">
@@ -118,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <form id="registerForm" method="POST" action="register.php" novalidate>
 
-        <!-- Nama -->
         <div class="form-row">
           <div class="form-group">
             <label for="nama_depan">Nama Depan</label>
@@ -140,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
 
-        <!-- No HP -->
         <div class="form-group phone-group">
           <label for="no_hp">Nomor HP / WhatsApp</label>
           <div class="input-wrapper">
@@ -152,7 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
 
-        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <div class="input-wrapper">
@@ -163,7 +154,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
 
-        <!-- Password -->
         <div class="form-row">
           <div class="form-group">
             <label for="password">Kata Sandi</label>
@@ -199,7 +189,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
 
-        <!-- Terms -->
         <div class="terms-row">
           <input type="checkbox" id="terms" name="terms"
             <?= isset($_POST['terms']) ? 'checked' : '' ?>>

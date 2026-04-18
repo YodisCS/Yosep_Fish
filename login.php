@@ -1,15 +1,12 @@
 <?php
 session_start();
 require_once 'config/db.php';
-
-// Jika sudah login, redirect
 if (isLoggedIn()) {
     isAdmin() ? redirect('admin_dashboard.php') : redirect('index.php');
 }
 
 $error = '';
 
-// ── Proses login ──
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim(strtolower($_POST['email'] ?? ''));
     $password = $_POST['password'] ?? '';
@@ -17,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || empty($password)) {
         $error = 'Email dan kata sandi wajib diisi.';
     } else {
-        // Query pakai LOWER() agar tidak case-sensitive
         $stmt = $conn->prepare("SELECT id, nama_depan, email, password, role FROM users WHERE LOWER(email) = ? LIMIT 1");
 
         if (!$stmt) {
@@ -34,14 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $pw_db  = $user['password'];
                 $valid  = false;
 
-                // Cek 1: password sudah berbentuk hash bcrypt
                 if (password_needs_rehash($pw_db, PASSWORD_BCRYPT) === false && password_verify($password, $pw_db)) {
                     $valid = true;
                 }
-                // Cek 2: password masih plain text (migrasi)
                 elseif (!str_starts_with($pw_db, '$2')) {
                     if ($pw_db === $password) {
-                        // Upgrade otomatis ke hash
                         $hash = password_hash($password, PASSWORD_BCRYPT);
                         $upd  = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
                         $upd->bind_param('si', $hash, $user['id']);
@@ -50,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $valid = true;
                     }
                 }
-                // Cek 3: hash ada tapi password_verify gagal — coba lagi sekali
                 else {
                     $valid = password_verify($password, $pw_db);
                 }
@@ -87,8 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <div class="auth-wrapper">
-
-  <!-- ═══ LEFT PANEL ═══ -->
   <div class="auth-left">
     <a href="index.php" class="auth-left-logo">YOSEP FISH</a>
     <div class="auth-left-content">
@@ -111,7 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="auth-left-footer">© 2026 Yosep Fish. Quality First.</div>
   </div>
 
-  <!-- ═══ RIGHT PANEL ═══ -->
   <div class="auth-right">
 
     <div class="auth-tabs" style="max-width:480px;width:100%">
