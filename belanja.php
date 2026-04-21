@@ -18,7 +18,7 @@ if ($action === 'get_products') {
   header('Content-Type: application/json');
   $kategori = $_GET['kategori'] ?? '';
   $search   = $_GET['search'] ?? '';
-  $maxHarga = (int)($_GET['max_harga'] ?? 1000000);
+  $maxHarga = (int)($_GET['max_harga'] ?? 10000000);
 
   if ($pdo) {
     $sql = "SELECT id, nama, kategori, warna, harga, deskripsi, gambar_url FROM produk WHERE status = 'ready' AND stok > 0 AND harga <= :harga";
@@ -594,8 +594,6 @@ if ($action === 'buat_pesanan') {
       cursor: pointer;
     }
 
-    .products-area {}
-
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -949,37 +947,6 @@ if ($action === 'buat_pesanan') {
       gap: 16px;
     }
 
-    .metode-group {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .metode-btn {
-      padding: 12px;
-      border: 1px solid var(--border-glass);
-      border-radius: var(--radius-sm);
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 600;
-      background: var(--bg-glass-light);
-      color: #FFFFFF;
-      transition: var(--transition);
-      text-align: center;
-    }
-
-    .metode-btn:hover {
-      border-color: var(--blue-light);
-      color: var(--blue-light);
-      background: var(--bg-glass);
-    }
-
-    .metode-btn.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: white;
-    }
-
     .cart-sidebar {
       background: var(--bg-glass);
       backdrop-filter: var(--blur);
@@ -1129,7 +1096,6 @@ if ($action === 'buat_pesanan') {
       color: var(--blue-light);
     }
 
-    /* Empty cart */
     .empty-cart {
       text-align: center;
       padding: 40px 20px;
@@ -1162,7 +1128,6 @@ if ($action === 'buat_pesanan') {
       pointer-events: all;
     }
 
-    /* Perubahan untuk modal putih agar teks di dalamnya gelap */
     .modal-box {
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: var(--blur);
@@ -1176,6 +1141,9 @@ if ($action === 'buat_pesanan') {
       transform: scale(0.95) translateY(10px);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: var(--shadow-xl);
+      max-height: 90vh;
+      /* Agar bisa scroll di hp jika konten memanjang */
+      overflow-y: auto;
     }
 
     .modal-overlay.open .modal-box {
@@ -1252,7 +1220,7 @@ if ($action === 'buat_pesanan') {
     .modal-info {
       font-size: 13px;
       color: #475569;
-      margin-bottom: 28px;
+      margin-bottom: 16px;
       line-height: 1.7;
     }
 
@@ -1261,13 +1229,14 @@ if ($action === 'buat_pesanan') {
       color: white;
       border: none;
       border-radius: var(--radius-sm);
-      padding: 13px 36px;
+      padding: 13px 20px;
       font-family: var(--font-display);
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       transition: var(--transition);
       box-shadow: var(--shadow-sm);
+      flex: 1;
     }
 
     .modal-btn:hover {
@@ -1285,6 +1254,7 @@ if ($action === 'buat_pesanan') {
       background: #F1F5F9;
       color: #0F172A;
       border: 1px solid #E2E8F0;
+      flex: 0.6;
     }
 
     .modal-btn.secondary:hover {
@@ -1299,7 +1269,6 @@ if ($action === 'buat_pesanan') {
       background: #16a34a;
     }
 
-    /* Modal khusus produk menggunakan warna gelap/glass */
     .product-modal-overlay {
       position: fixed;
       inset: 0;
@@ -1570,10 +1539,6 @@ if ($action === 'buat_pesanan') {
         grid-template-columns: 1fr;
       }
 
-      .metode-group {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
       .footer-inner {
         grid-template-columns: 1fr;
       }
@@ -1674,8 +1639,8 @@ if ($action === 'buat_pesanan') {
           ?>
         </div>
 
-        <label class="filter-label">Harga Maks <span class="price-display" id="priceDisplay">Rp 1.000.000</span></label>
-        <input type="range" id="priceRange" min="50000" max="1000000" step="50000" value="1000000"
+        <label class="filter-label">Harga Maks <span class="price-display" id="priceDisplay">Rp 10.000.000</span></label>
+        <input type="range" id="priceRange" min="50000" max="10000000" step="100000" value="10000000"
           oninput="updatePrice(this)" style="--pct:100%">
       </aside>
 
@@ -1723,11 +1688,11 @@ if ($action === 'buat_pesanan') {
 
   <div id="pageCheckout" class="page-checkout">
     <div class="checkout-wrap">
-      <button class="back-btn" onclick="confirmPayment()">
+      <button class="back-btn" onclick="showPage('shop')">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path d="M19 12H5m7-7-7 7 7 7" />
         </svg>
-        Konfirmasi Pembayaran
+        Kembali Belanja
       </button>
       <h1 class="checkout-title">CHECKOUT</h1>
 
@@ -1770,29 +1735,6 @@ if ($action === 'buat_pesanan') {
               </select>
             </div>
           </div>
-
-          <div class="checkout-card">
-            <div class="checkout-section-title">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="1" y="4" width="22" height="16" rx="2" />
-                <line x1="1" y1="10" x2="23" y2="10" />
-              </svg>
-              Metode Pembayaran (QRIS / QR Code)
-            </div>
-            <div style="text-align:center; padding: 16px; background: var(--bg-glass-light); border-radius: 12px; border: 1px solid var(--border-glass);">
-              <p style="font-size: 13px; color: #FFFFFF; margin-bottom: 16px; line-height: 1.5;">
-                Silakan scan QR Code di bawah ini menggunakan aplikasi e-Wallet atau M-Banking Anda.
-              </p>
-
-              <img src="assets/img/QRCode.jpeg"
-                alt="QR Code Pembayaran"
-                style="width: 200px; height: 200px; object-fit: contain; margin: 0 auto; border-radius: 12px; border: 4px solid white; box-shadow: var(--shadow-sm);">
-
-              <p style="font-size: 12px; color: #A5F3FC; margin-top: 16px; font-weight: 600;">
-                * Wajib screenshot bukti pembayaran untuk dikirim via WhatsApp.
-              </p>
-            </div>
-          </div>
         </div>
 
         <div class="cart-sidebar">
@@ -1831,15 +1773,25 @@ if ($action === 'buat_pesanan') {
         <div class="info-row"><strong>Ekspedisi:</strong> <span id="modalEkspedisi">—</span></div>
         <div class="info-row"><strong>Wilayah:</strong> <span id="modalWilayah">—</span></div>
       </div>
+
       <p class="modal-info">
-        Pembayaran via <strong id="modalMetode" style="color:#0F172A">—</strong>.<br>
         Subtotal: <strong id="modalSubtotal" style="color:#0F172A">—</strong> | Ongkir: <strong id="modalOngkir" style="color:#0F172A">—</strong><br>
-        <span style="font-size: 16px; color: #0F766E;"><strong>Total Bayar: <span id="modalTotal">—</span></strong></span><br><br>
-        Jika sudah scan QR Code & bayar, klik tombol di bawah untuk melampirkan <strong style="color:#0F172A">Bukti Screenshot</strong> via WhatsApp.
+        <span style="font-size: 18px; color: #0F766E;"><strong>Total Bayar: <span id="modalTotal">—</span></strong></span>
       </p>
+
+      <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+        <p style="font-size: 13px; color: #475569; margin-bottom: 12px; font-weight: 500;">
+          Silakan scan QR Code di bawah untuk menyelesaikan pembayaran via <strong id="modalMetode" style="color:#0F172A">—</strong>:
+        </p>
+        <img src="assets/img/QRCode.jpeg" alt="QR Code Pembayaran" style="width: 160px; height: 160px; object-fit: contain; margin: 0 auto; border-radius: 8px; border: 2px solid #CBD5E1; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <p style="font-size: 12px; color: #DC2626; margin-top: 12px; font-weight: 600;">
+          * Wajib melampirkan screenshot bukti pembayaran via WhatsApp
+        </p>
+      </div>
+
       <div class="modal-buttons">
-        <button class="modal-btn secondary" onclick="closeModal()">Kembali Belanja</button>
-        <button class="modal-btn primary" onclick="confirmPaymentFromModal()">Konfirmasi Pembayaran</button>
+        <button class="modal-btn secondary" onclick="closeModal()">Kembali</button>
+        <button class="modal-btn primary" onclick="confirmPaymentFromModal()">Kirim Bukti Pembayaran</button>
       </div>
     </div>
   </div>
@@ -1943,7 +1895,7 @@ if ($action === 'buat_pesanan') {
 
     function updatePrice(input) {
       const val = parseInt(input.value);
-      const pct = ((val - 50000) / (1000000 - 50000)) * 100;
+      const pct = ((val - 50000) / (10000000 - 50000)) * 100;
       input.style.setProperty('--pct', pct + '%');
       document.getElementById('priceDisplay').textContent = fmt(val);
       debounceFilter();
@@ -1998,7 +1950,6 @@ if ($action === 'buat_pesanan') {
       document.getElementById('cartCountNav').textContent = count;
       document.getElementById('floatBadge').textContent = count;
 
-      const badge = document.querySelector('.cart-badge') || document.createElement('span');
       const nav = document.querySelector('.cart-btn .cart-badge');
       if (nav) {
         nav.classList.add('bump');
